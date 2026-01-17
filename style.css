@@ -683,6 +683,10 @@ body {
   padding-top: 80px;
 }
 
+body.no-nav {
+  padding-top: 20px;
+}
+
 @media (max-width: 600px) {
   .nav {
     padding: 12px 15px;
