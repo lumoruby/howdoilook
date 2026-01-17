@@ -29,25 +29,81 @@
 
       <button type="submit" class="submit-btn">보내기</button>
     </form>
+
+    <div class="comments-section">
+      <h3>💬 댓글</h3>
+      <div class="comment-form">
+        <input type="text" id="commentName" placeholder="닉네임" maxlength="20">
+        <textarea id="commentText" placeholder="댓글을 입력하세요..." maxlength="500"></textarea>
+        <button id="commentSubmit" class="comment-btn">댓글 작성</button>
+      </div>
+      <div id="commentList" class="comment-list"></div>
+    </div>
   </div>
-  <div id="disqus_thread" style="margin-top: 50px;"></div>
-<script>
-    /**
-    *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-    *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
-    /*
-    var disqus_config = function () {
-    this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-    this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-    };
-    */
-    (function() { // DON'T EDIT BELOW THIS LINE
-    var d = document, s = d.createElement('script');
-    s.src = 'https://howdoilook-2.disqus.com/embed.js';
-    s.setAttribute('data-timestamp', +new Date());
-    (d.head || d.body).appendChild(s);
+
+  <script>
+    (function() {
+      const STORAGE_KEY = 'howdoilook_comments_form';
+
+      function loadComments() {
+        return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+      }
+
+      function saveComments(comments) {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(comments));
+      }
+
+      function formatDate(timestamp) {
+        const date = new Date(timestamp);
+        return date.toLocaleDateString('ko-KR') + ' ' + date.toLocaleTimeString('ko-KR', {hour: '2-digit', minute: '2-digit'});
+      }
+
+      function renderComments() {
+        const comments = loadComments();
+        const list = document.getElementById('commentList');
+
+        if (comments.length === 0) {
+          list.innerHTML = '<p class="no-comments">아직 댓글이 없습니다. 첫 댓글을 남겨보세요!</p>';
+          return;
+        }
+
+        list.innerHTML = comments.map(c => `
+          <div class="comment-item">
+            <div class="comment-header">
+              <span class="comment-name">${escapeHtml(c.name)}</span>
+              <span class="comment-date">${formatDate(c.timestamp)}</span>
+            </div>
+            <p class="comment-text">${escapeHtml(c.text)}</p>
+          </div>
+        `).join('');
+      }
+
+      function escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+      }
+
+      document.getElementById('commentSubmit').addEventListener('click', function() {
+        const name = document.getElementById('commentName').value.trim();
+        const text = document.getElementById('commentText').value.trim();
+
+        if (!name || !text) {
+          alert('닉네임과 댓글 내용을 모두 입력해주세요.');
+          return;
+        }
+
+        const comments = loadComments();
+        comments.unshift({ name, text, timestamp: Date.now() });
+        saveComments(comments);
+
+        document.getElementById('commentName').value = '';
+        document.getElementById('commentText').value = '';
+        renderComments();
+      });
+
+      renderComments();
     })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </script>
 </body>
 </html>
