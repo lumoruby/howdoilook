@@ -1,14 +1,44 @@
 <!doctype html>
-<html lang="en">
+<html lang="ko">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hello World</title>
+  <title>나와 닮은 동물 찾기</title>
   <link href='/style.css' rel='stylesheet'>
+  <script defer src="https://cdn.jsdelivr.net/npm/face-api.js@0.22.2/dist/face-api.min.js"></script>
 </head>
 <body>
-  <h1>Hello, world!</h1>
-  <button onclick="console.log('hello');">Press me</button>
+  <div class="container">
+    <h1>🐾 나와 닮은 동물은?</h1>
+    <p class="subtitle">카메라로 얼굴을 비추면 닮은 동물을 찾아드려요!</p>
+
+    <div class="camera-container">
+      <video id="video" autoplay muted playsinline></video>
+      <canvas id="overlay"></canvas>
+      <div id="loading" class="loading">
+        <div class="spinner"></div>
+        <p>모델 로딩 중...</p>
+      </div>
+    </div>
+
+    <button id="captureBtn" class="capture-btn" disabled>
+      📸 사진 찍기
+    </button>
+
+    <div id="result" class="result hidden">
+      <div class="result-card">
+        <div id="animalEmoji" class="animal-emoji"></div>
+        <h2 id="animalName"></h2>
+        <p id="animalDesc"></p>
+        <div class="match-bar">
+          <div id="matchPercent" class="match-fill"></div>
+        </div>
+        <p id="matchText" class="match-text"></p>
+      </div>
+      <button id="retryBtn" class="retry-btn">다시 찍기</button>
+    </div>
+  </div>
+
   <script defer type="text/javascript" src="/main.js"></script>
 </body>
 </html>
