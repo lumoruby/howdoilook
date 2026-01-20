@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>블로그 - How Do I Look?</title>
+  <title data-i18n-key="blogTitle"></title>
   <link href='/style.css' rel='stylesheet'>
   <style>
     .blog-page-content {
@@ -55,51 +55,56 @@
     }
   </style>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3665544522032044" crossorigin="anonymous"></script>
+  <script defer type="text/javascript" src="/i18n.js"></script>
 </head>
 <body>
 
   <header class="header">
     <div class="container">
       <div class="logo">
-        <a href="/">How Do I Look?</a>
+        <a href="/" data-i18n-key="siteTitle"></a>
       </div>
       <nav class="nav">
         <ul>
-          <li><a href="/">Home</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="blog.html">Blog</a></li>
-          <li><a href="contact.html">Contact</a></li>
+          <li><a href="/" data-i18n-key="navHome"></a></li>
+          <li><a href="about.html" data-i18n-key="navAbout"></a></li>
+          <li><a href="blog.html" data-i18n-key="navBlog"></a></li>
+          <li><a href="contact.html" data-i18n-key="navContact"></a></li>
         </ul>
       </nav>
+      <div class="lang-switcher">
+        <button onclick="i18n.setLanguage('ko')" class="lang-btn ko-btn">KO</button>
+        <button onclick="i18n.setLanguage('en')" class="lang-btn en-btn">EN</button>
+      </div>
     </div>
   </header>
 
   <main class="container">
     <div class="blog-page-content">
-      <h1>스타일 가이드</h1>
+      <h1 data-i18n-key="blogHeading"></h1>
       <ul class="article-list">
         
         <li class="article-item">
           <a href="blog-article-1.html">
-            <h2>퍼스널 스타일을 찾아 떠나는 여정: 5가지 필수 단계</h2>
-            <p class="excerpt">자신만의 스타일을 찾는 것은 자신을 표현하는 가장 강력한 방법 중 하나입니다. 어디서부터 시작해야 할지 막막하다면, 이 5가지 단계를 따라가 보세요.</p>
-            <span class="read-more">더 읽어보기 &rarr;</span>
+            <h2 data-i18n-key="blogArticle1Title"></h2>
+            <p class="excerpt" data-i18n-key="blogArticle1Excerpt"></p>
+            <span class="read-more" data-i18n-key="blogReadMore"></span>
           </a>
         </li>
 
         <li class="article-item">
           <a href="blog-article-2.html">
-            <h2>색채의 마법, 퍼스널 컬러: 나에게 딱 맞는 색상 찾기</h2>
-            <p class="excerpt">나에게 어울리는 색은 얼굴을 환하게 밝혀주고, 어울리지 않는 색은 단점을 부각시킵니다. 퍼스널 컬러의 기본 개념을 이해하고 자신에게 맞는 색상을 찾아보세요.</p>
-            <span class="read-more">더 읽어보기 &rarr;</span>
+            <h2 data-i18n-key="blogArticle2Title"></h2>
+            <p class="excerpt" data-i18n-key="blogArticle2Excerpt"></p>
+            <span class="read-more" data-i18n-key="blogReadMore"></span>
           </a>
         </li>
 
         <li class="article-item">
           <a href="blog-article-3.html">
-            <h2>옷장 속 기본 아이템: 어떤 상황에서도 빛나는 7가지 필수템</h2>
-            <p class="excerpt">유행은 계속 변하지만, 어떤 상황에서도 당신의 스타일을 지켜줄 클래식한 아이템들이 있습니다. 당신의 옷장에 반드시 필요한 7가지 아이템을 소개합니다.</p>
-            <span class="read-more">더 읽어보기 &rarr;</span>
+            <h2 data-i18n-key="blogArticle3Title"></h2>
+            <p class="excerpt" data-i18n-key="blogArticle3Excerpt"></p>
+            <span class="read-more" data-i18n-key="blogReadMore"></span>
           </a>
         </li>
 
@@ -109,10 +114,10 @@
 
   <footer class="footer">
     <div class="container">
-      <p>&copy; 2025 How Do I Look?. All rights reserved.</p>
+      <p data-i18n-key="footerCopyright"></p>
       <div class="footer-links">
-        <a href="privacy.html">개인정보처리방침</a>
-        <a href="terms.html">이용약관</a>
+        <a href="privacy.html" data-i18n-key="footerPrivacyPolicy"></a>
+        <a href="terms.html" data-i18n-key="footerTermsOfService"></a>
       </div>
     </div>
   </footer>

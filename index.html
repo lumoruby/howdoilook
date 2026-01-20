@@ -3,83 +3,76 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>나와 닮은 동물 찾기</title>
+  <title data-i18n-key="siteTitle"></title>
   <link href='/style.css' rel='stylesheet'>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3665544522032044" crossorigin="anonymous"></script>
-  <script defer src="https://cdn.jsdelivr.net/npm/face-api.js@0.22.2/dist/face-api.min.js"></script>
-</head>
-<!doctype html>
-<html lang="ko">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>How Do I Look? - AI 스타일 분석</title>
-  <link href='/style.css' rel='stylesheet'>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3665544522032044" crossorigin="anonymous"></script>
+  <script defer type="text/javascript" src="/i18n.js"></script>
 </head>
 <body>
 
   <header class="header">
     <div class="container">
       <div class="logo">
-        <a href="/">How Do I Look?</a>
+        <a href="/" data-i18n-key="siteTitle"></a>
       </div>
       <nav class="nav">
         <ul>
-          <li><a href="/">Home</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="blog.html">Blog</a></li>
-          <li><a href="contact.html">Contact</a></li>
+          <li><a href="/" data-i18n-key="navHome"></a></li>
+          <li><a href="about.html" data-i18n-key="navAbout"></a></li>
+          <li><a href="blog.html" data-i18n-key="navBlog"></a></li>
+          <li><a href="contact.html" data-i18n-key="navContact"></a></li>
         </ul>
       </nav>
+      <div class="lang-switcher">
+        <button onclick="i18n.setLanguage('ko')" class="lang-btn ko-btn">KO</button>
+        <button onclick="i18n.setLanguage('en')" class="lang-btn en-btn">EN</button>
+      </div>
     </div>
   </header>
 
   <main class="container">
     <section class="hero">
-      <h1>✨ AI가 분석하는 당신의 스타일</h1>
-      <p class="subtitle">사진을 업로드하고 퍼스널 컬러, 패션 아이템, 스타일링 팁까지 맞춤형 분석을 받아보세요.</p>
+      <h1 data-i18n-key="homeTitle"></h1>
+      <p class="subtitle" data-i18n-key="homeSubtitle"></p>
     </section>
 
     <section class="app-section">
       <div class="upload-container">
         <div id="image-preview-container" class="image-preview-container hidden">
-          <img id="image-preview" src="#" alt="업로드된 이미지 미리보기" />
+          <img id="image-preview" src="#" data-i18n-key="imageUploadAlt" />
         </div>
         <div id="upload-placeholder" class="upload-placeholder">
           <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" x2="12" y1="3" y2="15"/></svg>
-          <p>여기를 클릭하거나 사진을 드래그하여 업로드하세요.</p>
+          <p data-i18n-key="uploadPlaceholderText"></p>
         </div>
         <input type="file" id="image-upload" accept="image/*" style="display: none;">
       </div>
 
-      <button id="analyzeBtn" class="analyze-btn" disabled>
-        🔍 스타일 분석하기
-      </button>
+      <button id="analyzeBtn" class="analyze-btn" disabled data-i18n-key="analyzeButton"></button>
 
       <div id="loading" class="loading hidden">
         <div class="spinner"></div>
-        <p>AI가 당신의 스타일을 분석 중입니다...</p>
+        <p data-i18n-key="loadingText"></p>
       </div>
     </section>
 
     <section id="result" class="result hidden">
       <div class="result-card">
-        <h2>🎨 AI 스타일 리포트</h2>
+        <h2 data-i18n-key="reportTitle"></h2>
         <div id="report-content">
           <!-- AI 분석 결과가 여기에 동적으로 삽입됩니다. -->
         </div>
       </div>
-      <button id="retryBtn" class="retry-btn">새로운 사진으로 다시하기</button>
+      <button id="retryBtn" class="retry-btn" data-i18n-key="retryButton"></button>
     </section>
   </main>
 
   <footer class="footer">
     <div class="container">
-      <p>&copy; 2025 How Do I Look?. All rights reserved.</p>
+      <p data-i18n-key="footerCopyright"></p>
       <div class="footer-links">
-        <a href="privacy.html">개인정보처리방침</a>
-        <a href="terms.html">이용약관</a>
+        <a href="privacy.html" data-i18n-key="footerPrivacyPolicy"></a>
+        <a href="terms.html" data-i18n-key="footerTermsOfService"></a>
       </div>
     </div>
   </footer>

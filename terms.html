@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>이용약관 - How Do I Look?</title>
+  <title data-i18n-key="termsTitle"></title>
   <link href='/style.css' rel='stylesheet'>
   <style>
     .legal-page-content {
@@ -46,91 +46,96 @@
     }
   </style>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3665544522032044" crossorigin="anonymous"></script>
+  <script defer type="text/javascript" src="/i18n.js"></script>
 </head>
 <body>
 
   <header class="header">
     <div class="container">
       <div class="logo">
-        <a href="/">How Do I Look?</a>
+        <a href="/" data-i18n-key="siteTitle"></a>
       </div>
       <nav class="nav">
         <ul>
-          <li><a href="/">Home</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="blog.html">Blog</a></li>
-          <li><a href="contact.html">Contact</a></li>
+          <li><a href="/" data-i18n-key="navHome"></a></li>
+          <li><a href="about.html" data-i18n-key="navAbout"></a></li>
+          <li><a href="blog.html" data-i18n-key="navBlog"></a></li>
+          <li><a href="contact.html" data-i18n-key="navContact"></a></li>
         </ul>
       </nav>
+      <div class="lang-switcher">
+        <button onclick="i18n.setLanguage('ko')" class="lang-btn ko-btn">KO</button>
+        <button onclick="i18n.setLanguage('en')" class="lang-btn en-btn">EN</button>
+      </div>
     </div>
   </header>
 
   <main class="container">
     <div class="legal-page-content">
-      <h1>이용약관</h1>
-      <p class="last-updated">시행일: 2025년 1월 20일</p>
+      <h1 data-i18n-key="termsHeading"></h1>
+      <p class="last-updated" data-i18n-key="termsLastUpdated"></p>
 
-      <h2>제1조 (목적)</h2>
-      <p>본 약관은 How Do I Look? (이하 '회사')가 제공하는 AI 스타일 분석 서비스(이하 '서비스')의 이용과 관련하여 회사와 이용자의 권리, 의무 및 책임사항, 기타 필요한 사항을 규정함을 목적으로 합니다.</p>
+      <h2 data-i18n-key="termsSection1Title"></h2>
+      <p data-i18n-key="termsSection1P1"></p>
 
-      <h2>제2조 (용어의 정의)</h2>
+      <h2 data-i18n-key="termsSection2Title"></h2>
       <ol>
-        <li>'서비스'라 함은 이용자가 업로드한 사진을 바탕으로 회사가 제공하는 AI 스타일 분석 및 관련 정보 일체를 의미합니다.</li>
-        <li>'이용자'라 함은 본 약관에 따라 회사와 이용계약을 체결하고 회사가 제공하는 서비스를 이용하는 모든 사용자를 의미합니다.</li>
+        <li data-i18n-key="termsSection2Li1"></li>
+        <li data-i18n-key="termsSection2Li2"></li>
       </ol>
 
-      <h2>제3조 (서비스의 내용 및 이용)</h2>
+      <h2 data-i18n-key="termsSection3Title"></h2>
       <ol>
-        <li>회사는 이용자가 업로드한 사진을 바탕으로 퍼스널 컬러, 패션 아이템 추천 등의 스타일 분석 결과를 제공합니다.</li>
-        <li>서비스는 별도의 회원가입 없이 이용할 수 있으며, 무료로 제공됩니다.</li>
-        <li>서비스를 통해 제공되는 모든 정보(스타일 분석 결과 등)는 오락 및 참고 목적으로 제작되었습니다. 이는 전문적인 패션 컨설팅을 대체하지 않으며, 회사는 결과의 절대적인 정확성을 보증하지 않습니다.</li>
+        <li data-i18n-key="termsSection3Li1"></li>
+        <li data-i18n-key="termsSection3Li2"></li>
+        <li data-i18n-key="termsSection3Li3"></li>
       </ol>
       
-      <h2>제4조 (이용자의 의무)</h2>
-      <p>이용자는 다음 각 호에 해당하는 행위를 하여서는 안 됩니다.</p>
+      <h2><data-i18n-key="termsSection4Title"></data-i18n-key></h2>
+      <p data-i18n-key="termsSection4P1"></p>
       <ul>
-        <li>타인의 사진을 무단으로 도용하여 서비스를 이용하는 행위</li>
-        <li>서비스의 정상적인 운영을 방해하는 일체의 행위</li>
-        <li>회사 또는 제3자의 지적재산권을 침해하는 행위</li>
-        <li>기타 불법적이거나 부당한 행위</li>
+        <li data-i18n-key="termsSection4Li1"></li>
+        <li data-i18n-key="termsSection4Li2"></li>
+        <li data-i18n-key="termsSection4Li3"></li>
+        <li data-i18n-key="termsSection4Li4"></li>
       </ul>
 
-      <h2>제5조 (지적재산권)</h2>
+      <h2><data-i18n-key="termsSection5Title"></data-i18n-key></h2>
       <ol>
-        <li>서비스 내 모든 콘텐츠(텍스트, 이미지, 로고, 디자인, UI 등)에 대한 저작권 및 지적재산권은 회사에 귀속됩니다.</li>
-        <li>이용자는 회사의 사전 동의 없이 서비스의 콘텐츠를 복제, 송신, 출판, 배포, 방송 기타 방법에 의하여 영리 목적으로 이용하거나 제3자에게 이용하게 하여서는 안 됩니다.</li>
-        <li>이용자가 서비스 이용을 위해 업로드한 사진에 대한 저작권은 해당 이용자에게 있습니다. 회사는 해당 사진을 서비스 제공 목적 외에는 어떠한 용도로도 사용하거나 저장하지 않습니다.</li>
+        <li data-i18n-key="termsSection5Li1"></li>
+        <li data-i18n-key="termsSection5Li2"></li>
+        <li data-i18n-key="termsSection5Li3"></li>
       </ol>
 
-      <h2>제6조 (면책조항)</h2>
+      <h2><data-i18n-key="termsSection6Title"></data-i18n-key></h2>
       <ol>
-        <li>회사는 천재지변 또는 이에 준하는 불가항력으로 인하여 서비스를 제공할 수 없는 경우에는 서비스 제공에 관한 책임이 면제됩니다.</li>
-        <li>회사는 이용자의 귀책사유로 인한 서비스 이용의 장애에 대하여는 책임을 지지 않습니다.</li>
-        <li>회사는 이용자가 서비스를 이용하여 기대하는 수익을 상실한 것에 대하여 책임을 지지 않으며, 그 밖의 서비스를 통하여 얻은 자료로 인한 손해에 관하여 책임을 지지 않습니다.</li>
-        <li>서비스에 게재된 제3자 제공 광고의 내용, 신뢰도, 정확성에 대하여 회사는 어떠한 책임도 지지 않습니다.</li>
+        <li data-i18n-key="termsSection6Li1"></li>
+        <li data-i18n-key="termsSection6Li2"></li>
+        <li data-i18n-key="termsSection6Li3"></li>
+        <li data-i18n-key="termsSection6Li4"></li>
       </ol>
 
-      <h2>제7조 (서비스의 변경 및 중단)</h2>
+      <h2><data-i18n-key="termsSection7Title"></data-i18n-key></h2>
       <ol>
-        <li>회사는 상당한 이유가 있는 경우에 운영상, 기술상의 필요에 따라 제공하고 있는 전부 또는 일부 서비스를 변경할 수 있습니다.</li>
-        <li>회사는 서비스의 내용, 이용방법, 이용시간에 대하여 변경이 있는 경우 변경사유, 변경될 서비스의 내용 등을 해당 서비스 초기화면에 게시하여야 합니다.</li>
-        <li>회사는 무료로 제공되는 서비스의 일부 또는 전부를 회사의 정책 및 운영의 필요상 수정, 중단, 변경할 수 있으며, 이에 대하여 관련법에 특별한 규정이 없는 한 이용자에게 별도의 보상을 하지 않습니다.</li>
-      ol>
+        <li data-i18n-key="termsSection7Li1"></li>
+        <li data-i18n-key="termsSection7Li2"></li>
+        <li data-i18n-key="termsSection7Li3"></li>
+      </ol>
 
-      <h2>제8조 (준거법 및 관할법원)</h2>
+      <h2><data-i18n-key="termsSection8Title"></data-i18n-key></h2>
       <ol>
-        <li>회사와 이용자 간 제기된 소송은 대한민국법을 준거법으로 합니다.</li>
-        <li>회사와 이용자 간 발생한 분쟁에 관한 소송은 민사소송법상의 관할법원에 제소합니다.</li>
+        <li data-i18n-key="termsSection8Li1"></li>
+        <li data-i18n-key="termsSection8Li2"></li>
       </ol>
     </div>
   </main>
 
   <footer class="footer">
     <div class="container">
-      <p>&copy; 2025 How Do I Look?. All rights reserved.</p>
+      <p data-i18n-key="footerCopyright"></p>
       <div class="footer-links">
-        <a href="privacy.html">개인정보처리방침</a>
-        <a href="terms.html">이용약관</a>
+        <a href="privacy.html" data-i18n-key="footerPrivacyPolicy"></a>
+        <a href="terms.html" data-i18n-key="footerTermsOfService"></a>
       </div>
     </div>
   </footer>

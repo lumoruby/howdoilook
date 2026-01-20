@@ -316,6 +316,36 @@ main.container {
   color: var(--primary-color);
 }
 
+/* Language Switcher Styles */
+.lang-switcher {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.lang-btn {
+  background-color: var(--bg-color);
+  color: var(--secondary-color);
+  border: 1px solid var(--border-color);
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.lang-btn:hover {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+  color: white;
+}
+
+.lang-btn.active {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+  color: white;
+}
+
 /*
 * Responsive Design
 */

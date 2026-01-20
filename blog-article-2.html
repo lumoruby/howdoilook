@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>색채의 마법, 퍼스널 컬러: 나에게 딱 맞는 색상 찾기 - How Do I Look?</title>
+  <title data-i18n-key="article2Title"></title>
   <link href='/style.css' rel='stylesheet'>
   <style>
-    .article-content {
+    .blog-article-content-wrapper {
       max-width: 800px;
       margin: 40px auto;
       padding: 40px;
@@ -16,20 +16,20 @@
       text-align: left;
       line-height: 1.8;
     }
-    .article-content h1 {
+    .blog-article-content-wrapper h1 {
       font-size: 2.2rem;
       margin-bottom: 20px;
     }
-    .article-content h2 {
+    .blog-article-content-wrapper h2 {
       font-size: 1.5rem;
       color: var(--primary-color);
       margin-top: 30px;
       margin-bottom: 15px;
     }
-    .article-content p {
+    .blog-article-content-wrapper p {
       margin-bottom: 15px;
     }
-    .article-content ul, .article-content ol {
+    .blog-article-content-wrapper ul, .blog-article-content-wrapper ol {
       padding-left: 20px;
       margin-bottom: 15px;
     }
@@ -45,64 +45,78 @@
     }
   </style>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3665544522032044" crossorigin="anonymous"></script>
+  <script defer type="text/javascript" src="/i18n.js"></script>
 </head>
 <body>
 
   <header class="header">
     <div class="container">
       <div class="logo">
-        <a href="/">How Do I Look?</a>
+        <a href="/" data-i18n-key="siteTitle"></a>
       </div>
       <nav class="nav">
         <ul>
-          <li><a href="/">Home</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="blog.html">Blog</a></li>
-          <li><a href="contact.html">Contact</a></li>
+          <li><a href="/" data-i18n-key="navHome"></a></li>
+          <li><a href="about.html" data-i18n-key="navAbout"></a></li>
+          <li><a href="blog.html" data-i18n-key="navBlog"></a></li>
+          <li><a href="contact.html" data-i18n-key="navContact"></a></li>
         </ul>
       </nav>
+      <div class="lang-switcher">
+        <button onclick="i18n.setLanguage('ko')" class="lang-btn ko-btn">KO</button>
+        <button onclick="i18n.setLanguage('en')" class="lang-btn en-btn">EN</button>
+      </div>
     </div>
   </header>
 
   <main class="container">
-    <article class="article-content">
-      <h1>색채의 마법, 퍼스널 컬러: 나에게 딱 맞는 색상 찾기</h1>
-      
-      <p>똑같은 색상의 옷인데도 친구에게는 잘 어울리고 나에게는 어딘가 어색했던 경험, 없으신가요? 그 비밀은 바로 '퍼스널 컬러'에 있습니다. 퍼스널 컬러란 개인이 가진 고유의 피부, 머리카락, 눈동자 색과 조화를 이루어 생기를 더하고 이미지를 긍정적으로 만들어주는 색상 그룹을 의미합니다. 나에게 맞는 색을 찾으면 스타일링이 훨씬 쉬워지고, 자신감도 높아질 수 있습니다.</p>
-
-      <h2>퍼스널 컬러, 왜 중요할까?</h2>
-      <p>나에게 맞는 색은 피부 톤을 균일하게 만들고, 잡티나 다크서클을 완화해주어 전체적으로 화사하고 건강해 보이는 효과를 줍니다. 반면, 어울리지 않는 색은 피부를 칙칙하게 만들거나, 단점을 부각시키고, 옷과 사람이 겉도는 느낌을 줄 수 있습니다. 퍼스널 컬러를 알면 쇼핑할 때 불필요한 소비를 줄일 수 있고, 옷장을 효율적으로 관리하는 데도 도움이 됩니다.</p>
-
-      <h2>퍼스널 컬러의 기본: 웜톤 vs 쿨톤</h2>
-      <p>퍼스널 컬러는 크게 '웜톤(Warm Tone)'과 '쿨톤(Cool Tone)'으로 나뉩니다. 이는 색상에 노란 기가 도는지, 혹은 푸른 기가 도는지에 따른 구분입니다.</p>
-      <ul>
-        <li><strong>웜톤:</strong> 따뜻하고 생기 있는 느낌을 줍니다. 주로 골드 액세서리가 잘 어울리고, 손목의 혈관 색이 녹색에 가깝습니다. 대표 색상으로는 아이보리, 코랄, 오렌지, 브라운 등이 있습니다.</li>
-        <li><strong>쿨톤:</strong> 시원하고 도시적인 느낌을 줍니다. 실버 액세서리가 잘 어울리며, 손목의 혈관 색이 파란색이나 보라색에 가깝습니다. 대표 색상으로는 순백색, 라벤더, 마젠타, 네이비 등이 있습니다.</li>
-      </ul>
-
-      <h2>사계절 퍼스널 컬러 유형</h2>
-      <p>웜톤과 쿨톤은 다시 명도와 채도에 따라 각각 두 가지, 총 네 가지의 사계절 유형으로 세분화됩니다.</p>
-      <ol>
-        <li><strong>봄 웜톤 (Spring):</strong> 고채도의 밝고 따뜻한 색상이 잘 어울립니다. 사랑스럽고 생기 있는 이미지를 연출합니다. (예: 코랄 핑크, 피치, 라이트 옐로우)</li>
-        <li><strong>여름 쿨톤 (Summer):</strong> 저채도의 밝고 시원한 파스텔 톤이 잘 어울립니다. 우아하고 부드러운 이미지를 연출합니다. (예: 라벤더, 스카이 블루, 로즈 핑크)</li>
-        <li><strong>가을 웜톤 (Autumn):</strong> 저채도의 깊고 따뜻한 색상이 잘 어울립니다. 성숙하고 지적인 이미지를 연출합니다. (예: 카키, 버건디, 머스타드)</li>
-        <li><strong>겨울 쿨톤 (Winter):</strong> 고채도의 선명하고 차가운 색상이나 무채색이 잘 어울립니다. 카리스마 있고 시크한 이미지를 연출합니다. (예: 핫핑크, 코발트 블루, 블랙, 화이트)</li>
-      </ol>
-
-      <h2>나만의 컬러를 찾아보세요</h2>
-      <p>정확한 진단을 위해서는 전문가의 도움을 받는 것이 가장 좋지만, 일상에서도 간단한 자가 진단을 시도해볼 수 있습니다. 다양한 색상의 옷이나 스카프를 얼굴 가까이에 대보고, 어떤 색이 얼굴을 더 환하게 밝혀주는지 거울을 통해 확인해보세요. How Do I Look? 서비스 또한 당신의 퍼스널 컬러를 찾는 데 훌륭한 첫걸음이 되어줄 수 있습니다.</p>
-    </article>
+    <div id="article-container" class="blog-article-content-wrapper">
+      <!-- Article content will be loaded dynamically here -->
+    </div>
   </main>
 
   <footer class="footer">
     <div class="container">
-      <p>&copy; 2025 How Do I Look?. All rights reserved.</p>
+      <p data-i18n-key="footerCopyright"></p>
       <div class="footer-links">
-        <a href="privacy.html">개인정보처리방침</a>
-        <a href="terms.html">이용약관</a>
+        <a href="privacy.html" data-i18n-key="footerPrivacyPolicy"></a>
+        <a href="terms.html" data-i18n-key="footerTermsOfService"></a>
       </div>
     </div>
   </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      // Function to load article content based on language
+      async function loadArticleContent(articleId, lang) {
+        const articleContainer = document.getElementById('article-container');
+        try {
+          const response = await fetch(`/blog-content/${lang}/${articleId}.html`);
+          if (!response.ok) {
+            throw new Error(`Failed to load article ${articleId} for language ${lang}.`);
+          }
+          const content = await response.text();
+          articleContainer.innerHTML = content;
+        } catch (error) {
+          console.error('Error loading article content:', error);
+          articleContainer.innerHTML = `<p>Error loading article content.</p>`;
+        }
+      }
+
+      // Initial load based on current language
+      await i18n.loadTranslations(); // Ensure translations are loaded first
+      loadArticleContent('article-2', i18n.currentLang);
+
+      // Override applyTranslations in i18n.js to also update article content
+      const originalApplyTranslations = i18n.applyTranslations;
+      i18n.applyTranslations = () => {
+        originalApplyTranslations.call(i18n); // Call original method
+        loadArticleContent('article-2', i18n.currentLang); // Update article specific content
+      };
+    });
+  </script>
+</body>
+</html>
 
 </body>
 </html>

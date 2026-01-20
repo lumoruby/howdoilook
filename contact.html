@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Contact Us - How Do I Look?</title>
+  <title data-i18n-key="contactTitle"></title>
   <link href='/style.css' rel='stylesheet'>
   <style>
     .contact-page-content {
@@ -74,54 +74,59 @@
     }
   </style>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3665544522032044" crossorigin="anonymous"></script>
+  <script defer type="text/javascript" src="/i18n.js"></script>
 </head>
 <body>
 
   <header class="header">
     <div class="container">
       <div class="logo">
-        <a href="/">How Do I Look?</a>
+        <a href="/" data-i18n-key="siteTitle"></a>
       </div>
       <nav class="nav">
         <ul>
-          <li><a href="/">Home</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="blog.html">Blog</a></li>
-          <li><a href="contact.html">Contact</a></li>
+          <li><a href="/" data-i18n-key="navHome"></a></li>
+          <li><a href="about.html" data-i18n-key="navAbout"></a></li>
+          <li><a href="blog.html" data-i18n-key="navBlog"></a></li>
+          <li><a href="contact.html" data-i18n-key="navContact"></a></li>
         </ul>
       </nav>
+      <div class="lang-switcher">
+        <button onclick="i18n.setLanguage('ko')" class="lang-btn ko-btn">KO</button>
+        <button onclick="i18n.setLanguage('en')" class="lang-btn en-btn">EN</button>
+      </div>
     </div>
   </header>
 
   <main class="container">
     <div class="contact-page-content">
-      <h2>문의하기</h2>
-      <p>서비스에 대한 피드백, 질문, 파트너십 제안 등 어떤 내용이든 환영합니다.<br>아래 양식을 통해 메시지를 보내주시면 신속하게 답변드리겠습니다.</p>
+      <h2 data-i18n-key="contactHeading"></h2>
+      <p data-i18n-key="contactSubtitle"></p>
       
       <form class="contact-form" action="https://formspree.io/f/xreeejao" method="POST">
         <div class="form-group">
-          <label for="name">이름</label>
+          <label for="name" data-i18n-key="contactLabelName"></label>
           <input type="text" id="name" name="name" required>
         </div>
         <div class="form-group">
-          <label for="email">이메일</label>
+          <label for="email" data-i18n-key="contactLabelEmail"></label>
           <input type="email" id="email" name="_replyto" required>
         </div>
         <div class="form-group">
-          <label for="message">메시지</label>
+          <label for="message" data-i18n-key="contactLabelMessage"></label>
           <textarea id="message" name="message" required></textarea>
         </div>
-        <button type="submit" class="submit-btn">메시지 보내기</button>
+        <button type="submit" class="submit-btn" data-i18n-key="contactSubmitButton"></button>
       </form>
     </div>
   </main>
 
   <footer class="footer">
     <div class="container">
-      <p>&copy; 2025 How Do I Look?. All rights reserved.</p>
+      <p data-i18n-key="footerCopyright"></p>
       <div class="footer-links">
-        <a href="privacy.html">개인정보처리방침</a>
-        <a href="terms.html">이용약관</a>
+        <a href="privacy.html" data-i18n-key="footerPrivacyPolicy"></a>
+        <a href="terms.html" data-i18n-key="footerTermsOfService"></a>
       </div>
     </div>
   </footer>

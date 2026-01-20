@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>개인정보처리방침 - How Do I Look?</title>
+  <title data-i18n-key="privacyTitle"></title>
   <link href='/style.css' rel='stylesheet'>
   <style>
     .legal-page-content {
@@ -53,101 +53,106 @@
     }
   </style>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3665544522032044" crossorigin="anonymous"></script>
+  <script defer type="text/javascript" src="/i18n.js"></script>
 </head>
 <body>
 
   <header class="header">
     <div class="container">
       <div class="logo">
-        <a href="/">How Do I Look?</a>
+        <a href="/" data-i18n-key="siteTitle"></a>
       </div>
       <nav class="nav">
         <ul>
-          <li><a href="/">Home</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="blog.html">Blog</a></li>
-          <li><a href="contact.html">Contact</a></li>
+          <li><a href="/" data-i18n-key="navHome"></a></li>
+          <li><a href="about.html" data-i18n-key="navAbout"></a></li>
+          <li><a href="blog.html" data-i18n-key="navBlog"></a></li>
+          <li><a href="contact.html" data-i18n-key="navContact"></a></li>
         </ul>
       </nav>
+      <div class="lang-switcher">
+        <button onclick="i18n.setLanguage('ko')" class="lang-btn ko-btn">KO</button>
+        <button onclick="i18n.setLanguage('en')" class="lang-btn en-btn">EN</button>
+      </div>
     </div>
   </header>
 
   <main class="container">
     <div class="legal-page-content">
-      <h1>개인정보처리방침</h1>
-      <p class="last-updated">시행일: 2025년 1월 20일</p>
+      <h1 data-i18n-key="privacyHeading"></h1>
+      <p class="last-updated" data-i18n-key="privacyLastUpdated"></p>
 
-      <h2>1. 총칙</h2>
-      <p>How Do I Look? (이하 '회사')는 이용자의 개인정보를 매우 중요하게 생각하며, '개인정보 보호법' 등 관련 법령을 준수하고 있습니다. 회사는 본 개인정보처리방침을 통해 이용자가 제공하는 개인정보가 어떠한 용도와 방식으로 이용되고 있으며, 개인정보보호를 위해 어떠한 조치가 취해지고 있는지 알려드립니다.</p>
+      <h2 data-i18n-key="privacySection1Title"></h2>
+      <p data-i18n-key="privacySection1P1"></p>
 
-      <h2>2. 수집하는 개인정보의 항목 및 수집 방법</h2>
-      <p>회사는 서비스 제공을 위해 필요한 최소한의 개인정보만을 수집합니다.</p>
+      <h2 data-i18n-key="privacySection2Title"></h2>
+      <p data-i18n-key="privacySection2P1"></p>
       <ul>
-        <li><strong>AI 스타일 분석 서비스 이용 시:</strong>
+        <li><strong data-i18n-key="privacySection2Sub1Title"></strong>
           <ul>
-            <li>이용자가 업로드하는 사진 이미지는 서비스 제공(스타일 분석) 목적으로만 사용됩니다.</li>
-            <li><strong>사진 이미지는 서버에 저장되거나 수집되지 않으며, 모든 분석은 이용자의 웹 브라우저 내에서 일시적으로 처리된 후 즉시 폐기됩니다.</strong></li>
+            <li data-i18n-key="privacySection2Sub1Li1"></li>
+            <li data-i18n-key="privacySection2Sub1Li2"></li>
           </ul>
         </li>
-        <li><strong>문의하기 서비스 이용 시:</strong>
+        <li><strong data-i18n-key="privacySection2Sub2Title"></strong>
           <ul>
-            <li>수집 항목: 이름, 이메일 주소, 문의 내용</li>
-            <li>수집 방법: 이용자가 문의 양식에 직접 입력</li>
+            <li data-i18n-key="privacySection2Sub2Li1"></li>
+            <li data-i18n-key="privacySection2Sub2Li2"></li>
           </ul>
         </li>
-        <li><strong>자동 수집 정보:</strong>
+        <li><strong data-i18n-key="privacySection2Sub3Title"></strong>
           <ul>
-            <li>서비스 이용 과정에서 IP 주소, 쿠키, 서비스 이용 기록, 기기 정보 등이 자동으로 생성되어 수집될 수 있습니다. 이는 서비스 개선 및 부정 이용 방지를 위해 사용됩니다.</li>
+            <li data-i18n-key="privacySection2Sub3Li1"></li>
           </ul>
         </li>
       </ul>
 
-      <h2>3. 개인정보의 이용 목적</h2>
-      <p>회사는 수집한 개인정보를 다음의 목적으로만 활용합니다.</p>
+      <h2 data-i18n-key="privacySection3Title"></h2>
+      <p data-i18n-key="privacySection3P1"></p>
       <ul>
-        <li>AI 스타일 분석 결과 제공</li>
-        <li>서비스 관련 문의 및 요청 처리</li>
-        <li>서비스 이용 통계 분석, 서비스 개선 및 신규 서비스 개발</li>
-        <li>부정 이용 방지 및 비인가 사용 방지</li>
+        <li data-i18n-key="privacySection3Li1"></li>
+        <li data-i18n-key="privacySection3Li2"></li>
+        <li data-i18n-key="privacySection3Li3"></li>
+        <li data-i18n-key="privacySection3Li4"></li>
       </ul>
 
-      <h2>4. 개인정보의 제3자 제공</h2>
-      <p>회사는 이용자의 사전 동의 없이 개인정보를 외부에 제공하지 않습니다. 단, 다음의 경우에는 예외로 합니다.</p>
+      <h2 data-i18n-key="privacySection4Title"></h2>
+      <p data-i18n-key="privacySection4P1"></p>
       <ul>
-        <li>법령의 규정에 의거하거나, 수사 목적으로 법령에 정해진 절차와 방법에 따라 수사기관의 요구가 있는 경우</li>
+        <li data-i18n-key="privacySection4Li1"></li>
       </ul>
 
-      <h2>5. 쿠키 및 광고</h2>
-      <p>회사는 서비스 품질 향상 및 맞춤형 서비스 제공을 위해 쿠키(Cookie)를 사용합니다. 또한, 제3자 광고 서비스인 Google AdSense를 이용하고 있습니다.</p>
+      <h2 data-i18n-key="privacySection5Title"></h2>
+      <p data-i18n-key="privacySection5P1"></p>
       <ul>
-        <li>Google AdSense는 쿠키를 사용하여 이용자의 웹사이트 방문 기록을 기반으로 맞춤형 광고를 제공할 수 있습니다.</li>
-        <li>이용자는 브라우저 설정을 변경하여 쿠키 저장을 거부할 수 있으나, 이 경우 서비스 이용에 불편이 있을 수 있습니다.</li>
-        <li>Google의 광고 정책에 대한 자세한 정보는 <a href="https://policies.google.com/technologies/ads" target="_blank" rel="noopener">Google 광고 기술 정책</a> 페이지에서 확인하실 수 있습니다.</li>
+        <li data-i18n-key="privacySection5Li1"></li>
+        <li data-i18n-key="privacySection5Li2"></li>
+        <li data-i18n-key="privacySection5Li3"></li>
       </ul>
 
-      <h2>6. 이용자의 권리</h2>
-      <p>이용자는 언제든지 자신의 개인정보에 대해 열람, 정정, 삭제, 처리정지를 요청할 수 있습니다. 회사는 이용자의 요청에 대해 지체 없이 조치하겠습니다. 권리 행사는 <a href="contact.html">문의하기</a> 페이지를 통해 하실 수 있습니다.</p>
+      <h2 data-i18n-key="privacySection6Title"></h2>
+      <p data-i18n-key="privacySection6P1"></p>
 
-      <h2>7. 개인정보의 기술적/관리적 보호 대책</h2>
-      <p>회사는 이용자의 개인정보를 처리함에 있어 개인정보가 분실, 도난, 유출, 변조 또는 훼손되지 않도록 안전성 확보를 위하여 다음과 같은 기술적/관리적 대책을 강구하고 있습니다. (예: 암호화 통신, 접근 제어 등)</p>
+      <h2 data-i18n-key="privacySection7Title"></h2>
+      <p data-i18n-key="privacySection7P1"></p>
 
-      <h2>8. 개인정보처리방침의 변경</h2>
-      <p>본 개인정보처리방침의 내용 추가, 삭제 및 수정이 있을 경우 시행일 최소 7일 전에 본 페이지를 통해 고지할 것입니다.</p>
+      <h2 data-i18n-key="privacySection8Title"></h2>
+      <p data-i18n-key="privacySection8P1"></p>
 
-      <h2>9. 문의</h2>
-      <p>개인정보 처리와 관련된 문의, 불만 처리, 피해 구제 등에 관한 사항은 아래 연락처로 문의하실 수 있습니다.</p>
+      <h2 data-i18n-key="privacySection9Title"></h2>
+      <p data-i18n-key="privacySection9P1"></p>
       <ul>
-        <li><strong>문의 채널:</strong> <a href="contact.html">문의하기 페이지</a></li>
+        <li data-i18n-key="privacySection9Li1"></li>
       </ul>
     </div>
   </main>
 
   <footer class="footer">
     <div class="container">
-      <p>&copy; 2025 How Do I Look?. All rights reserved.</p>
+      <p data-i18n-key="footerCopyright"></p>
       <div class="footer-links">
-        <a href="privacy.html">개인정보처리방침</a>
-        <a href="terms.html">이용약관</a>
+        <a href="privacy.html" data-i18n-key="footerPrivacyPolicy"></a>
+        <a href="terms.html" data-i18n-key="footerTermsOfService"></a>
       </div>
     </div>
   </footer>

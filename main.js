@@ -1,3 +1,18 @@
+// main.js
+
+// This function needs to be global or accessible by i18n.js
+// It will be called by i18n.js when language changes to re-render the report
+function updateReportContentI18n() {
+    // If a report is currently displayed, re-generate it with the new language
+    const resultSection = document.getElementById('result');
+    if (resultSection && !resultSection.classList.contains('hidden')) {
+        const reportContent = document.getElementById('report-content');
+        if (reportContent) {
+            reportContent.innerHTML = generateStyleReport();
+        }
+    }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   // --- DOM Element Selectors ---
   const uploadContainer = document.getElementById('upload-container');
@@ -15,7 +30,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Trigger file input when the placeholder is clicked
   uploadContainer.addEventListener('click', () => {
+    // Temporarily make the input visible to ensure it's clickable on mobile
+    imageUpload.style.display = 'block';
     imageUpload.click();
+    // Hide it again immediately after triggering the click
+    imageUpload.style.display = 'none';
   });
 
   // Handle file selection
@@ -115,42 +134,48 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Data for randomization ---
     const personalColors = [
       {
-        name: '봄 웜톤 (Spring)',
-        desc: '생기 있고 따뜻한 이미지를 가지고 있으며, 밝고 화사한 컬러가 잘 어울립니다. 아이보리, 코랄 핑크, 라이트 옐로우와 같은 색상이 당신의 매력을 한층 더 돋보이게 합니다.',
+        name: i18n.getTranslation('personalColorSpringName'),
+        desc: i18n.getTranslation('personalColorSpringDesc')
       },
       {
-        name: '여름 쿨톤 (Summer)',
-        desc: '부드럽고 시원한 이미지를 연출하며, 파스텔 톤의 차분한 컬러가 잘 어울립니다. 라벤더, 스카이 블루, 로즈 핑크와 같은 색상으로 우아함을 더해보세요.',
+        name: i18n.getTranslation('personalColorSummerName'),
+        desc: i18n.getTranslation('personalColorSummerDesc')
       },
       {
-        name: '가을 웜톤 (Autumn)',
-        desc: '깊고 성숙한 분위기를 자아내며, 차분하고 따뜻한 얼스(earth) 톤 컬러가 제격입니다. 카키, 버건디, 머스타드, 브라운 계열의 색상으로 지적인 매력을 발산할 수 있습니다.',
+        name: i18n.getTranslation('personalColorAutumnName'),
+        desc: i18n.getTranslation('personalColorAutumnDesc')
       },
       {
-        name: '겨울 쿨톤 (Winter)',
-        desc: '강렬하고 도시적인 이미지를 가지고 있으며, 선명한 고채도의 컬러나 무채색이 잘 어울립니다. 블랙, 화이트, 핫핑크, 코발트 블루와 같은 색상으로 시크하고 카리스마 있는 모습을 연출해보세요.',
+        name: i18n.getTranslation('personalColorWinterName'),
+        desc: i18n.getTranslation('personalColorWinterDesc')
       },
     ];
 
     const fashionItems = [
-      '클래식한 트렌치 코트', '미니멀한 디자인의 블레이저', '편안하면서도 스타일리시한 와이드 팬츠',
-      'A라인 실루엣의 롱 스커트', '고품질의 캐시미어 니트', '세련된 실크 블라우스',
-      '어디에나 잘 어울리는 데님 자켓', '가죽 소재의 바이커 자켓', '활용도 높은 스트라이프 티셔츠',
+      i18n.getTranslation('fashionItem1'),
+      i18n.getTranslation('fashionItem2'),
+      i18n.getTranslation('fashionItem3'),
+      i18n.getTranslation('fashionItem4'),
+      i18n.getTranslation('fashionItem5'),
+      i18n.getTranslation('fashionItem6'),
+      i18n.getTranslation('fashionItem7'),
+      i18n.getTranslation('fashionItem8'),
+      i18n.getTranslation('fashionItem9'),
     ];
 
     const stylingTips = [
-      '상의와 하의의 색상을 톤온톤으로 매치하여 안정감 있고 세련된 룩을 연출해보세요.',
-      '액세서리를 활용하여 포인트를 주는 것이 좋습니다. 심플한 의상에 볼드한 목걸이나 귀걸이를 더해보세요.',
-      '신발과 가방의 색상이나 소재를 통일하면 전체적인 룩에 안정감을 줄 수 있습니다.',
-      '세 가지 이상의 색상을 사용하지 않도록 주의하여 전체적인 조화를 맞추는 것이 중요합니다.',
-      '실루엣의 균형을 생각하세요. 상의가 오버사이즈라면 하의는 슬림하게, 반대의 경우도 마찬가지입니다.',
+      i18n.getTranslation('stylingTip1'),
+      i18n.getTranslation('stylingTip2'),
+      i18n.getTranslation('stylingTip3'),
+      i18n.getTranslation('stylingTip4'),
+      i18n.getTranslation('stylingTip5'),
     ];
     
     const overallImpressions = [
-        '전체적으로 부드럽고 따뜻한 인상을 줍니다. 자연스러운 컬러와 소재를 활용하면 매력이 배가될 것입니다.',
-        '지적이고 세련된 분위기가 돋보입니다. 미니멀하고 구조적인 디자인의 의류를 선택하는 것을 추천합니다.',
-        '활기차고 긍정적인 에너지가 느껴집니다. 밝고 선명한 색상을 사용하여 개성을 표현해보세요.',
-        '우아하고 차분한 매력을 가지고 있습니다. 흐르는 듯한 실루엣의 의상으로 여성스러움을 강조할 수 있습니다.'
+        i18n.getTranslation('overallImpression1'),
+        i18n.getTranslation('overallImpression2'),
+        i18n.getTranslation('overallImpression3'),
+        i18n.getTranslation('overallImpression4')
     ];
 
     // --- Randomly select content ---
@@ -161,20 +186,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Build the HTML string ---
     return `
-      <h3>✨ 총평</h3>
+      <h3 data-i18n-key="reportSectionOverallImpression">${i18n.getTranslation('reportSectionOverallImpression')}</h3>
       <p>${selectedImpression}</p>
       
-      <h3>🎨 퍼스널 컬러 진단</h3>
+      <h3 data-i18n-key="reportSectionPersonalColorDiagnosis">${i18n.getTranslation('reportSectionPersonalColorDiagnosis')}</h3>
       <p><strong>${selectedColor.name}:</strong> ${selectedColor.desc}</p>
       
-      <h3>👕 추천 패션 아이템</h3>
+      <h3 data-i18n-key="reportSectionRecommendedFashionItems">${i18n.getTranslation('reportSectionRecommendedFashionItems')}</h3>
       <ul>
         <li>${selectedItems[0]}</li>
         <li>${selectedItems[1]}</li>
         <li>${selectedItems[2]}</li>
       </ul>
       
-      <h3>💡 오늘의 스타일링 팁</h3>
+      <h3 data-i18n-key="reportSectionTodaysStylingTip">${i18n.getTranslation('reportSectionTodaysStylingTip')}</h3>
       <p>${selectedTip}</p>
     `;
   }

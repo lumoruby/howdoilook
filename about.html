@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>About - How Do I Look?</title>
+  <title data-i18n-key="aboutTitle"></title>
   <link href='/style.css' rel='stylesheet'>
   <style>
     /* 추가적인 about 페이지 스타일 */
@@ -47,64 +47,57 @@
     }
   </style>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3665544522032044" crossorigin="anonymous"></script>
+  <script defer type="text/javascript" src="/i18n.js"></script>
 </head>
 <body>
 
   <header class="header">
     <div class="container">
       <div class="logo">
-        <a href="/">How Do I Look?</a>
+        <a href="/" data-i18n-key="siteTitle"></a>
       </div>
       <nav class="nav">
         <ul>
-          <li><a href="/">Home</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="blog.html">Blog</a></li>
-          <li><a href="contact.html">Contact</a></li>
+          <li><a href="/" data-i18n-key="navHome"></a></li>
+          <li><a href="about.html" data-i18n-key="navAbout"></a></li>
+          <li><a href="blog.html" data-i18n-key="navBlog"></a></li>
+          <li><a href="contact.html" data-i18n-key="navContact"></a></li>
         </ul>
       </nav>
+      <div class="lang-switcher">
+        <button onclick="i18n.setLanguage('ko')" class="lang-btn ko-btn">KO</button>
+        <button onclick="i18n.setLanguage('en')" class="lang-btn en-btn">EN</button>
+      </div>
     </div>
   </header>
 
   <main class="container">
     <div class="about-page-content">
-      <h2>우리의 이야기</h2>
+      <h2 data-i18n-key="aboutHeadingOurStory"></h2>
       
-      <h3>패션, 그 이상의 가치</h3>
-      <p>
-        'How Do I Look?'은 단순한 스타일 분석 도구를 넘어, 모든 사람이 자신만의 고유한 아름다움을 발견하고 자신감을 가질 수 있도록 돕기 위해 만들어졌습니다. 우리는 패션이 단순히 옷을 입는 행위가 아니라, 자신을 표현하고 세상과 소통하는 중요한 방법이라고 믿습니다.
-      </p>
+      <h3 data-i18n-key="aboutHeadingFashionValue"></h3>
+      <p data-i18n-key="aboutParagraphFashionValue1"></p>
 
-      <p class="mission-statement">
-        "우리의 미션은 기술을 통해 패션의 문턱을 낮추고, 누구나 자신의 스타일을 쉽고 재미있게 탐색할 수 있는 환경을 제공하는 것입니다."
-      </p>
+      <p class="mission-statement" data-i18n-key="aboutMissionStatement"></p>
 
-      <h3>AI 스타일 분석이란?</h3>
-      <p>
-        복잡한 패션 이론이나 값비싼 컨설팅 없이도 괜찮습니다. 'How Do I Look?'은 당신의 사진 한 장을 기반으로 퍼스널 컬러, 추천 패션 아이템, 그리고 실용적인 스타일링 팁을 제공하는 가상 스타일리스트입니다. 저희의 목표는 당신이 매일 아침 '오늘 뭐 입지?'라는 고민 대신, 설레는 마음으로 옷장을 열 수 있도록 돕는 것입니다.
-      </p>
+      <h3 data-i18n-key="aboutHeadingAIAnalysis"></h3>
+      <p data-i18n-key="aboutParagraphAIAnalysis1"></p>
 
-      <h3>어떻게 작동하나요?</h3>
-      <p>
-        당신이 사진을 업로드하면, 저희 시스템은 이미지의 전체적인 색상과 분위기를 분석합니다. 이 데이터를 기반으로, 사전 구축된 패션 데이터베이스와 스타일링 알고리즘을 통해 가장 적합한 퍼스널 컬러와 스타일 제안을 생성합니다. 이 과정은 수많은 패션 전문가의 노하우를 자동화하여 당신에게 전달하는 것과 같습니다.
-      </p>
-      <p>
-        <strong>참고:</strong> 본 서비스는 현재 실제 인공지능이 아닌, 정교하게 설계된 알고리즘을 통해 분석 결과를 제공하는 시뮬레이션 형태로 운영됩니다. 저희는 사용자의 개인정보를 매우 중요하게 생각하며, 업로드된 사진은 서버에 저장되거나 다른 목적으로 사용되지 않습니다.
-      </p>
+      <h3 data-i18n-key="aboutHeadingHowItWorks"></h3>
+      <p data-i18n-key="aboutParagraphHowItWorks1"></p>
+      <p data-i18n-key="aboutParagraphHowItWorksNote"></p>
 
-      <h3>지금 시작해보세요</h3>
-      <p>
-        자신만의 스타일을 찾아 떠나는 여정, 'How Do I Look?'과 함께 시작해보세요. 새로운 당신을 발견할 준비가 되셨나요?
-      </p>
+      <h3 data-i18n-key="aboutHeadingStartNow"></h3>
+      <p data-i18n-key="aboutParagraphStartNow1"></p>
     </div>
   </main>
 
   <footer class="footer">
     <div class="container">
-      <p>&copy; 2025 How Do I Look?. All rights reserved.</p>
+      <p data-i18n-key="footerCopyright"></p>
       <div class="footer-links">
-        <a href="privacy.html">개인정보처리방침</a>
-        <a href="terms.html">이용약관</a>
+        <a href="privacy.html" data-i18n-key="footerPrivacyPolicy"></a>
+        <a href="terms.html" data-i18n-key="footerTermsOfService"></a>
       </div>
     </div>
   </footer>
