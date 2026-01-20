@@ -28,16 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // --- Event Listeners ---
 
-  // Trigger file input when the placeholder is clicked
-  uploadContainer.addEventListener('click', () => {
-    // Temporarily make the input visible to ensure it's clickable on mobile
-    imageUpload.style.display = 'block';
-    imageUpload.click();
-    // Hide it again immediately after triggering the click
-    imageUpload.style.display = 'none';
-  });
-
-  // Handle file selection
+  // Handle file selection (this event listener remains for when a file is actually chosen)
   imageUpload.addEventListener('change', (event) => {
     const file = event.target.files[0];
     if (file) {
