@@ -30,9 +30,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Handle file selection (this event listener remains for when a file is actually chosen)
   imageUpload.addEventListener('change', (event) => {
+    console.log('imageUpload change event fired!', event.target.files); // DEBUG LOG
     const file = event.target.files[0];
     if (file) {
       handleImageUpload(file);
+    } else {
+      console.log('No file selected or file input cancelled.'); // DEBUG LOG
+      // Optionally, disable analyzeBtn if file selection is cancelled
+      analyzeBtn.disabled = true;
     }
   });
 
@@ -56,11 +61,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Handle analysis button click
   analyzeBtn.addEventListener('click', () => {
+    console.log('Analyze button clicked!'); // DEBUG LOG
     startAnalysis();
   });
 
   // Handle retry button click
   retryBtn.addEventListener('click', () => {
+    console.log('Retry button clicked!'); // DEBUG LOG
     resetApp();
   });
 
@@ -71,12 +78,25 @@ document.addEventListener('DOMContentLoaded', () => {
    * @param {File} file The image file uploaded by the user.
    */
   function handleImageUpload(file) {
+    console.log('handleImageUpload called with file:', file); // DEBUG LOG
+    if (!file) {
+        console.error('handleImageUpload called without a file.'); // Ensure file exists
+        analyzeBtn.disabled = true;
+        return;
+    }
+
     const reader = new FileReader();
     reader.onload = (e) => {
       imagePreview.src = e.target.result;
       uploadPlaceholder.classList.add('hidden');
       imagePreviewContainer.classList.remove('hidden');
       analyzeBtn.disabled = false;
+      console.log('Analyze button enabled.'); // DEBUG LOG
+    };
+    reader.onerror = (error) => { // Add error handling for FileReader
+      console.error('FileReader error:', error); // DEBUG LOG
+      analyzeBtn.disabled = true; // Disable button on error
+      alert('파일을 읽는 도중 오류가 발생했습니다. 다른 파일을 시도해 주세요.'); // User feedback
     };
     reader.readAsDataURL(file);
   }
@@ -85,6 +105,7 @@ document.addEventListener('DOMContentLoaded', () => {
    * Simulates the AI analysis process.
    */
   function startAnalysis() {
+    console.log('startAnalysis called.'); // DEBUG LOG
     // Hide upload section and show loading spinner
     uploadContainer.classList.add('hidden');
     analyzeBtn.classList.add('hidden');
@@ -99,6 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
       // Hide loading spinner and show results
       loading.classList.add('hidden');
       resultSection.classList.remove('hidden');
+      console.log('Analysis complete, result displayed.'); // DEBUG LOG
     }, 2500); // 2.5 second delay
   }
 
@@ -106,6 +128,7 @@ document.addEventListener('DOMContentLoaded', () => {
    * Resets the application to its initial state.
    */
   function resetApp() {
+    console.log('resetApp called.'); // DEBUG LOG
     resultSection.classList.add('hidden');
     imagePreview.src = '#';
     imagePreviewContainer.classList.add('hidden');
