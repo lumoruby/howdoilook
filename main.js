@@ -1,282 +1,181 @@
-// 동물 데이터
-const animals = [
-  {
-    name: '강아지',
-    emoji: '🐶',
-    desc: '충성스럽고 활발한 에너지가 느껴져요! 사람들과 어울리는 걸 좋아하고 친근한 인상이에요.',
-    traits: { eyeSize: 'large', faceShape: 'round', expression: 'happy' }
-  },
-  {
-    name: '고양이',
-    emoji: '🐱',
-    desc: '도도하면서도 매력적인 분위기! 독립적이고 신비로운 느낌이 나요.',
-    traits: { eyeSize: 'large', faceShape: 'oval', expression: 'neutral' }
-  },
-  {
-    name: '여우',
-    emoji: '🦊',
-    desc: '영리하고 세련된 인상이에요! 날카로운 눈매와 매력적인 미소가 포인트.',
-    traits: { eyeSize: 'medium', faceShape: 'angular', expression: 'sly' }
-  },
-  {
-    name: '곰',
-    emoji: '🐻',
-    desc: '듬직하고 포근한 느낌! 믿음직스럽고 따뜻한 인상이에요.',
-    traits: { eyeSize: 'small', faceShape: 'round', expression: 'calm' }
-  },
-  {
-    name: '토끼',
-    emoji: '🐰',
-    desc: '귀엽고 사랑스러운 인상! 순수하고 부드러운 분위기가 나요.',
-    traits: { eyeSize: 'large', faceShape: 'oval', expression: 'innocent' }
-  },
-  {
-    name: '사자',
-    emoji: '🦁',
-    desc: '카리스마 넘치는 리더 스타일! 당당하고 자신감 있는 인상이에요.',
-    traits: { eyeSize: 'medium', faceShape: 'square', expression: 'confident' }
-  },
-  {
-    name: '올빼미',
-    emoji: '🦉',
-    desc: '지적이고 신중한 분위기! 깊은 생각에 잠긴 듯한 현명한 인상이에요.',
-    traits: { eyeSize: 'large', faceShape: 'round', expression: 'wise' }
-  },
-  {
-    name: '판다',
-    emoji: '🐼',
-    desc: '친근하고 평화로운 느낌! 여유롭고 사랑받는 인상이에요.',
-    traits: { eyeSize: 'large', faceShape: 'round', expression: 'peaceful' }
-  },
-  {
-    name: '늑대',
-    emoji: '🐺',
-    desc: '신비롭고 강인한 인상! 독립적이면서도 의리있는 분위기가 나요.',
-    traits: { eyeSize: 'medium', faceShape: 'angular', expression: 'intense' }
-  },
-  {
-    name: '햄스터',
-    emoji: '🐹',
-    desc: '통통하고 귀여운 매력! 먹는 걸 좋아하고 복슬복슬한 느낌이에요.',
-    traits: { eyeSize: 'small', faceShape: 'round', expression: 'cute' }
-  }
-];
+document.addEventListener('DOMContentLoaded', () => {
+  // --- DOM Element Selectors ---
+  const uploadContainer = document.getElementById('upload-container');
+  const imageUpload = document.getElementById('image-upload');
+  const imagePreviewContainer = document.getElementById('image-preview-container');
+  const imagePreview = document.getElementById('image-preview');
+  const uploadPlaceholder = document.getElementById('upload-placeholder');
+  const analyzeBtn = document.getElementById('analyzeBtn');
+  const loading = document.getElementById('loading');
+  const resultSection = document.getElementById('result');
+  const reportContent = document.getElementById('report-content');
+  const retryBtn = document.getElementById('retryBtn');
 
-// DOM 요소
-const video = document.getElementById('video');
-const overlay = document.getElementById('overlay');
-const loading = document.getElementById('loading');
-const captureBtn = document.getElementById('captureBtn');
-const result = document.getElementById('result');
-const retryBtn = document.getElementById('retryBtn');
-const animalEmoji = document.getElementById('animalEmoji');
-const animalName = document.getElementById('animalName');
-const animalDesc = document.getElementById('animalDesc');
-const matchPercent = document.getElementById('matchPercent');
-const matchText = document.getElementById('matchText');
+  // --- Event Listeners ---
 
-let modelsLoaded = false;
-
-// face-api.js 모델 로드
-async function loadModels() {
-  const MODEL_URL = 'https://cdn.jsdelivr.net/npm/@vladmandic/face-api/model';
-
-  try {
-    await Promise.all([
-      faceapi.nets.tinyFaceDetector.loadFromUri(MODEL_URL),
-      faceapi.nets.faceLandmark68Net.loadFromUri(MODEL_URL),
-      faceapi.nets.faceExpressionNet.loadFromUri(MODEL_URL)
-    ]);
-    modelsLoaded = true;
-    loading.classList.add('hidden');
-    captureBtn.disabled = false;
-  } catch (error) {
-    console.error('모델 로딩 실패:', error);
-    loading.innerHTML = '<p>모델 로딩에 실패했습니다.<br>페이지를 새로고침해주세요.</p>';
-  }
-}
-
-// 웹캠 시작
-async function startCamera() {
-  try {
-    const stream = await navigator.mediaDevices.getUserMedia({
-      video: { facingMode: 'user', width: 640, height: 480 }
-    });
-    video.srcObject = stream;
-    await video.play();
-
-    // 캔버스 크기 설정
-    overlay.width = video.videoWidth;
-    overlay.height = video.videoHeight;
-
-    // 모델 로드
-    await loadModels();
-  } catch (error) {
-    console.error('카메라 접근 실패:', error);
-    loading.innerHTML = '<p>카메라 접근이 필요합니다.<br>카메라 권한을 허용해주세요.</p>';
-  }
-}
-
-// 얼굴 특징 분석
-function analyzeFaceFeatures(landmarks, expressions) {
-  const positions = landmarks.positions;
-
-  // 눈 크기 계산 (왼쪽 눈 기준)
-  const leftEye = landmarks.getLeftEye();
-  const eyeWidth = Math.abs(leftEye[3].x - leftEye[0].x);
-  const eyeHeight = Math.abs(leftEye[4].y - leftEye[1].y);
-  const eyeRatio = eyeHeight / eyeWidth;
-
-  // 얼굴 형태 계산
-  const jawOutline = landmarks.getJawOutline();
-  const faceWidth = Math.abs(jawOutline[16].x - jawOutline[0].x);
-  const faceHeight = Math.abs(jawOutline[8].y - positions[27].y);
-  const faceRatio = faceHeight / faceWidth;
-
-  // 눈 크기 분류
-  let eyeSize;
-  if (eyeRatio > 0.35) eyeSize = 'large';
-  else if (eyeRatio > 0.25) eyeSize = 'medium';
-  else eyeSize = 'small';
-
-  // 얼굴 형태 분류
-  let faceShape;
-  if (faceRatio > 1.3) faceShape = 'oval';
-  else if (faceRatio > 1.1) faceShape = 'angular';
-  else if (faceRatio > 0.9) faceShape = 'square';
-  else faceShape = 'round';
-
-  // 표정 분석
-  const expEntries = Object.entries(expressions);
-  const dominantExp = expEntries.reduce((a, b) => a[1] > b[1] ? a : b)[0];
-
-  return {
-    eyeSize,
-    faceShape,
-    dominantExpression: dominantExp,
-    eyeRatio,
-    faceRatio,
-    expressions
-  };
-}
-
-// 동물 매칭
-function matchAnimal(features) {
-  const scores = animals.map(animal => {
-    let score = 50; // 기본 점수
-
-    // 눈 크기 매칭
-    if (animal.traits.eyeSize === features.eyeSize) {
-      score += 15;
-    } else if (
-      (animal.traits.eyeSize === 'large' && features.eyeSize === 'medium') ||
-      (animal.traits.eyeSize === 'medium' && features.eyeSize === 'large') ||
-      (animal.traits.eyeSize === 'medium' && features.eyeSize === 'small') ||
-      (animal.traits.eyeSize === 'small' && features.eyeSize === 'medium')
-    ) {
-      score += 8;
-    }
-
-    // 얼굴 형태 매칭
-    if (animal.traits.faceShape === features.faceShape) {
-      score += 20;
-    } else if (
-      (animal.traits.faceShape === 'round' && features.faceShape === 'oval') ||
-      (animal.traits.faceShape === 'oval' && features.faceShape === 'round')
-    ) {
-      score += 10;
-    }
-
-    // 표정 기반 보너스
-    const exp = features.expressions;
-    if (animal.name === '강아지' && (exp.happy > 0.3 || exp.surprised > 0.3)) score += 10;
-    if (animal.name === '고양이' && exp.neutral > 0.4) score += 10;
-    if (animal.name === '사자' && (exp.angry > 0.2 || exp.neutral > 0.3)) score += 10;
-    if (animal.name === '토끼' && (exp.surprised > 0.3 || exp.happy > 0.2)) score += 10;
-    if (animal.name === '곰' && exp.neutral > 0.5) score += 10;
-    if (animal.name === '여우' && exp.happy > 0.2 && exp.neutral > 0.2) score += 10;
-    if (animal.name === '올빼미' && exp.surprised > 0.2) score += 10;
-    if (animal.name === '늑대' && (exp.angry > 0.1 || exp.sad > 0.2)) score += 10;
-    if (animal.name === '판다' && exp.neutral > 0.4) score += 10;
-    if (animal.name === '햄스터' && exp.happy > 0.3) score += 10;
-
-    // 랜덤 요소 추가 (재미를 위해)
-    score += Math.random() * 10;
-
-    return { animal, score: Math.min(score, 95) };
+  // Trigger file input when the placeholder is clicked
+  uploadContainer.addEventListener('click', () => {
+    imageUpload.click();
   });
 
-  // 최고 점수 동물 선택
-  scores.sort((a, b) => b.score - a.score);
-  return scores[0];
-}
+  // Handle file selection
+  imageUpload.addEventListener('change', (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      handleImageUpload(file);
+    }
+  });
 
-// 사진 찍기 및 분석
-async function capture() {
-  if (!modelsLoaded) return;
+  // Handle drag and drop
+  uploadContainer.addEventListener('dragover', (event) => {
+    event.preventDefault();
+    uploadContainer.style.borderColor = 'var(--primary-color)';
+  });
+  uploadContainer.addEventListener('dragleave', (event) => {
+    event.preventDefault();
+    uploadContainer.style.borderColor = 'var(--border-color)';
+  });
+  uploadContainer.addEventListener('drop', (event) => {
+    event.preventDefault();
+    uploadContainer.style.borderColor = 'var(--border-color)';
+    const file = event.dataTransfer.files[0];
+    if (file && file.type.startsWith('image/')) {
+      handleImageUpload(file);
+    }
+  });
 
-  captureBtn.disabled = true;
-  captureBtn.textContent = '분석 중...';
+  // Handle analysis button click
+  analyzeBtn.addEventListener('click', () => {
+    startAnalysis();
+  });
 
-  // 얼굴 감지
-  const detections = await faceapi
-    .detectSingleFace(video, new faceapi.TinyFaceDetectorOptions())
-    .withFaceLandmarks()
-    .withFaceExpressions();
+  // Handle retry button click
+  retryBtn.addEventListener('click', () => {
+    resetApp();
+  });
 
-  if (!detections) {
-    alert('얼굴을 찾을 수 없어요! 카메라를 정면으로 바라봐주세요.');
-    captureBtn.disabled = false;
-    captureBtn.textContent = '📸 사진 찍기';
-    return;
+  // --- Core Functions ---
+
+  /**
+   * Processes the uploaded image file.
+   * @param {File} file The image file uploaded by the user.
+   */
+  function handleImageUpload(file) {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      imagePreview.src = e.target.result;
+      uploadPlaceholder.classList.add('hidden');
+      imagePreviewContainer.classList.remove('hidden');
+      analyzeBtn.disabled = false;
+    };
+    reader.readAsDataURL(file);
   }
 
-  // 얼굴 특징 분석
-  const features = analyzeFaceFeatures(detections.landmarks, detections.expressions);
+  /**
+   * Simulates the AI analysis process.
+   */
+  function startAnalysis() {
+    // Hide upload section and show loading spinner
+    uploadContainer.classList.add('hidden');
+    analyzeBtn.classList.add('hidden');
+    loading.classList.remove('hidden');
+    resultSection.classList.add('hidden');
 
-  // 동물 매칭
-  const match = matchAnimal(features);
+    // Simulate a delay for "AI processing"
+    setTimeout(() => {
+      const reportHTML = generateStyleReport();
+      reportContent.innerHTML = reportHTML;
 
-  // 결과 표시
-  showResult(match);
-}
+      // Hide loading spinner and show results
+      loading.classList.add('hidden');
+      resultSection.classList.remove('hidden');
+    }, 2500); // 2.5 second delay
+  }
 
-// 결과 표시
-function showResult(match) {
-  const { animal, score } = match;
-  const percentage = Math.round(score);
+  /**
+   * Resets the application to its initial state.
+   */
+  function resetApp() {
+    resultSection.classList.add('hidden');
+    imagePreview.src = '#';
+    imagePreviewContainer.classList.add('hidden');
+    uploadPlaceholder.classList.remove('hidden');
+    uploadContainer.classList.remove('hidden');
+    analyzeBtn.classList.remove('hidden');
+    analyzeBtn.disabled = true;
+    imageUpload.value = ''; // Clear the file input
+  }
 
-  animalEmoji.textContent = animal.emoji;
-  animalName.textContent = `${animal.name} 상`;
-  animalDesc.textContent = animal.desc;
-  matchText.textContent = `닮은 정도: ${percentage}%`;
+  /**
+   * Generates a randomized, detailed style report.
+   * This is the core of providing "high-value content".
+   * @returns {string} HTML string of the generated report.
+   */
+  function generateStyleReport() {
+    // --- Data for randomization ---
+    const personalColors = [
+      {
+        name: '봄 웜톤 (Spring)',
+        desc: '생기 있고 따뜻한 이미지를 가지고 있으며, 밝고 화사한 컬러가 잘 어울립니다. 아이보리, 코랄 핑크, 라이트 옐로우와 같은 색상이 당신의 매력을 한층 더 돋보이게 합니다.',
+      },
+      {
+        name: '여름 쿨톤 (Summer)',
+        desc: '부드럽고 시원한 이미지를 연출하며, 파스텔 톤의 차분한 컬러가 잘 어울립니다. 라벤더, 스카이 블루, 로즈 핑크와 같은 색상으로 우아함을 더해보세요.',
+      },
+      {
+        name: '가을 웜톤 (Autumn)',
+        desc: '깊고 성숙한 분위기를 자아내며, 차분하고 따뜻한 얼스(earth) 톤 컬러가 제격입니다. 카키, 버건디, 머스타드, 브라운 계열의 색상으로 지적인 매력을 발산할 수 있습니다.',
+      },
+      {
+        name: '겨울 쿨톤 (Winter)',
+        desc: '강렬하고 도시적인 이미지를 가지고 있으며, 선명한 고채도의 컬러나 무채색이 잘 어울립니다. 블랙, 화이트, 핫핑크, 코발트 블루와 같은 색상으로 시크하고 카리스마 있는 모습을 연출해보세요.',
+      },
+    ];
 
-  // 카메라 숨기기
-  document.querySelector('.camera-container').style.display = 'none';
-  captureBtn.style.display = 'none';
+    const fashionItems = [
+      '클래식한 트렌치 코트', '미니멀한 디자인의 블레이저', '편안하면서도 스타일리시한 와이드 팬츠',
+      'A라인 실루엣의 롱 스커트', '고품질의 캐시미어 니트', '세련된 실크 블라우스',
+      '어디에나 잘 어울리는 데님 자켓', '가죽 소재의 바이커 자켓', '활용도 높은 스트라이프 티셔츠',
+    ];
 
-  // 결과 표시
-  result.classList.remove('hidden');
+    const stylingTips = [
+      '상의와 하의의 색상을 톤온톤으로 매치하여 안정감 있고 세련된 룩을 연출해보세요.',
+      '액세서리를 활용하여 포인트를 주는 것이 좋습니다. 심플한 의상에 볼드한 목걸이나 귀걸이를 더해보세요.',
+      '신발과 가방의 색상이나 소재를 통일하면 전체적인 룩에 안정감을 줄 수 있습니다.',
+      '세 가지 이상의 색상을 사용하지 않도록 주의하여 전체적인 조화를 맞추는 것이 중요합니다.',
+      '실루엣의 균형을 생각하세요. 상의가 오버사이즈라면 하의는 슬림하게, 반대의 경우도 마찬가지입니다.',
+    ];
+    
+    const overallImpressions = [
+        '전체적으로 부드럽고 따뜻한 인상을 줍니다. 자연스러운 컬러와 소재를 활용하면 매력이 배가될 것입니다.',
+        '지적이고 세련된 분위기가 돋보입니다. 미니멀하고 구조적인 디자인의 의류를 선택하는 것을 추천합니다.',
+        '활기차고 긍정적인 에너지가 느껴집니다. 밝고 선명한 색상을 사용하여 개성을 표현해보세요.',
+        '우아하고 차분한 매력을 가지고 있습니다. 흐르는 듯한 실루엣의 의상으로 여성스러움을 강조할 수 있습니다.'
+    ];
 
-  // 애니메이션으로 퍼센트 바 채우기
-  setTimeout(() => {
-    matchPercent.style.width = `${percentage}%`;
-  }, 100);
-}
+    // --- Randomly select content ---
+    const selectedColor = personalColors[Math.floor(Math.random() * personalColors.length)];
+    const selectedImpression = overallImpressions[Math.floor(Math.random() * overallImpressions.length)];
+    const selectedItems = [...fashionItems].sort(() => 0.5 - Math.random()).slice(0, 3);
+    const selectedTip = stylingTips[Math.floor(Math.random() * stylingTips.length)];
 
-// 다시 시도
-function retry() {
-  result.classList.add('hidden');
-  document.querySelector('.camera-container').style.display = 'block';
-  captureBtn.style.display = 'inline-block';
-  captureBtn.disabled = false;
-  captureBtn.textContent = '📸 사진 찍기';
-  matchPercent.style.width = '0%';
-}
-
-// 이벤트 리스너
-captureBtn.addEventListener('click', capture);
-retryBtn.addEventListener('click', retry);
-
-// 앱 시작
-startCamera();
+    // --- Build the HTML string ---
+    return `
+      <h3>✨ 총평</h3>
+      <p>${selectedImpression}</p>
+      
+      <h3>🎨 퍼스널 컬러 진단</h3>
+      <p><strong>${selectedColor.name}:</strong> ${selectedColor.desc}</p>
+      
+      <h3>👕 추천 패션 아이템</h3>
+      <ul>
+        <li>${selectedItems[0]}</li>
+        <li>${selectedItems[1]}</li>
+        <li>${selectedItems[2]}</li>
+      </ul>
+      
+      <h3>💡 오늘의 스타일링 팁</h3>
+      <p>${selectedTip}</p>
+    `;
+  }
+});

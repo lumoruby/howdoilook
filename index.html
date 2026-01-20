@@ -8,124 +8,84 @@
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3665544522032044" crossorigin="anonymous"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/face-api.js@0.22.2/dist/face-api.min.js"></script>
 </head>
-<body class="no-nav">
-  <div class="container">
-    <h1>🐾 나와 닮은 동물은?</h1>
-    <p class="subtitle">카메라로 얼굴을 비추면 닮은 동물을 찾아드려요!</p>
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How Do I Look? - AI 스타일 분석</title>
+  <link href='/style.css' rel='stylesheet'>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3665544522032044" crossorigin="anonymous"></script>
+</head>
+<body>
 
-    <div class="camera-container">
-      <video id="video" autoplay muted playsinline></video>
-      <canvas id="overlay"></canvas>
-      <div id="loading" class="loading">
-        <div class="spinner"></div>
-        <p>모델 로딩 중...</p>
+  <header class="header">
+    <div class="container">
+      <div class="logo">
+        <a href="/">How Do I Look?</a>
       </div>
+      <nav class="nav">
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
     </div>
+  </header>
 
-    <button id="captureBtn" class="capture-btn" disabled>
-      📸 사진 찍기
-    </button>
+  <main class="container">
+    <section class="hero">
+      <h1>✨ AI가 분석하는 당신의 스타일</h1>
+      <p class="subtitle">사진을 업로드하고 퍼스널 컬러, 패션 아이템, 스타일링 팁까지 맞춤형 분석을 받아보세요.</p>
+    </section>
 
-    <div id="result" class="result hidden">
-      <div class="result-card">
-        <div id="animalEmoji" class="animal-emoji"></div>
-        <h2 id="animalName"></h2>
-        <p id="animalDesc"></p>
-        <div class="match-bar">
-          <div id="matchPercent" class="match-fill"></div>
+    <section class="app-section">
+      <div class="upload-container">
+        <div id="image-preview-container" class="image-preview-container hidden">
+          <img id="image-preview" src="#" alt="업로드된 이미지 미리보기" />
         </div>
-        <p id="matchText" class="match-text"></p>
+        <div id="upload-placeholder" class="upload-placeholder">
+          <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" x2="12" y1="3" y2="15"/></svg>
+          <p>여기를 클릭하거나 사진을 드래그하여 업로드하세요.</p>
+        </div>
+        <input type="file" id="image-upload" accept="image/*" style="display: none;">
       </div>
-      <button id="retryBtn" class="retry-btn">다시 찍기</button>
-    </div>
-    
-    <div class="comments-section">
-      <h3>💬 댓글</h3>
-      <div class="comment-form">
-        <input type="text" id="commentName" placeholder="닉네임" maxlength="20">
-        <textarea id="commentText" placeholder="댓글을 입력하세요..." maxlength="500"></textarea>
-        <button id="commentSubmit" class="comment-btn">댓글 작성</button>
+
+      <button id="analyzeBtn" class="analyze-btn" disabled>
+        🔍 스타일 분석하기
+      </button>
+
+      <div id="loading" class="loading hidden">
+        <div class="spinner"></div>
+        <p>AI가 당신의 스타일을 분석 중입니다...</p>
       </div>
-      <div id="commentList" class="comment-list"></div>
-    </div>
-  </div>
+    </section>
 
-  <script defer type="text/javascript" src="/main.js"></script>
-  <script>
-    (function() {
-      const STORAGE_KEY = 'howdoilook_comments_index';
-
-      function loadComments() {
-        return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-      }
-
-      function saveComments(comments) {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(comments));
-      }
-
-      function formatDate(timestamp) {
-        const date = new Date(timestamp);
-        return date.toLocaleDateString('ko-KR') + ' ' + date.toLocaleTimeString('ko-KR', {hour: '2-digit', minute: '2-digit'});
-      }
-
-      function renderComments() {
-        const comments = loadComments();
-        const list = document.getElementById('commentList');
-
-        if (comments.length === 0) {
-          list.innerHTML = '<p class="no-comments">아직 댓글이 없습니다. 첫 댓글을 남겨보세요!</p>';
-          return;
-        }
-
-        list.innerHTML = comments.map(c => `
-          <div class="comment-item">
-            <div class="comment-header">
-              <span class="comment-name">${escapeHtml(c.name)}</span>
-              <span class="comment-date">${formatDate(c.timestamp)}</span>
-            </div>
-            <p class="comment-text">${escapeHtml(c.text)}</p>
-          </div>
-        `).join('');
-      }
-
-      function escapeHtml(text) {
-        const div = document.createElement('div');
-        div.textContent = text;
-        return div.innerHTML;
-      }
-
-      document.getElementById('commentSubmit').addEventListener('click', function() {
-        const name = document.getElementById('commentName').value.trim();
-        const text = document.getElementById('commentText').value.trim();
-
-        if (!name || !text) {
-          alert('닉네임과 댓글 내용을 모두 입력해주세요.');
-          return;
-        }
-
-        const comments = loadComments();
-        comments.unshift({ name, text, timestamp: Date.now() });
-        saveComments(comments);
-
-        document.getElementById('commentName').value = '';
-        document.getElementById('commentText').value = '';
-        renderComments();
-      });
-
-      renderComments();
-    })();
-  </script>
+    <section id="result" class="result hidden">
+      <div class="result-card">
+        <h2>🎨 AI 스타일 리포트</h2>
+        <div id="report-content">
+          <!-- AI 분석 결과가 여기에 동적으로 삽입됩니다. -->
+        </div>
+      </div>
+      <button id="retryBtn" class="retry-btn">새로운 사진으로 다시하기</button>
+    </section>
+  </main>
 
   <footer class="footer">
-    <div class="footer-content">
-      <p>&copy; 2025 나와 닮은 동물 찾기. All rights reserved.</p>
+    <div class="container">
+      <p>&copy; 2025 How Do I Look?. All rights reserved.</p>
       <div class="footer-links">
         <a href="privacy.html">개인정보처리방침</a>
         <a href="terms.html">이용약관</a>
-        <a href="about.html">사이트 소개</a>
-        <a href="form.html">문의하기</a>
       </div>
     </div>
   </footer>
+
+  <script defer type="text/javascript" src="/main.js"></script>
 </body>
+</html>
+
 </html>
