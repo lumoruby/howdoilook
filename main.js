@@ -13,6 +13,85 @@ function updateReportContentI18n() {
     }
 }
 
+/**
+ * Generates a randomized, detailed style report.
+ * This is the core of providing "high-value content".
+ * @returns {string} HTML string of the generated report.
+ */
+function generateStyleReport() {
+  // --- Data for randomization ---
+  const personalColors = [
+    {
+      name: i18n.getTranslation('personalColorSpringName'),
+      desc: i18n.getTranslation('personalColorSpringDesc')
+    },
+    {
+      name: i18n.getTranslation('personalColorSummerName'),
+      desc: i18n.getTranslation('personalColorSummerDesc')
+    },
+    {
+      name: i18n.getTranslation('personalColorAutumnName'),
+      desc: i18n.getTranslation('personalColorAutumnDesc')
+    },
+    {
+      name: i18n.getTranslation('personalColorWinterName'),
+      desc: i18n.getTranslation('personalColorWinterDesc')
+    },
+  ];
+
+  const fashionItems = [
+    i18n.getTranslation('fashionItem1'),
+    i18n.getTranslation('fashionItem2'),
+    i18n.getTranslation('fashionItem3'),
+    i18n.getTranslation('fashionItem4'),
+    i18n.getTranslation('fashionItem5'),
+    i18n.getTranslation('fashionItem6'),
+    i18n.getTranslation('fashionItem7'),
+    i18n.getTranslation('fashionItem8'),
+    i18n.getTranslation('fashionItem9'),
+  ];
+
+  const stylingTips = [
+    i18n.getTranslation('stylingTip1'),
+    i18n.getTranslation('stylingTip2'),
+    i18n.getTranslation('stylingTip3'),
+    i18n.getTranslation('stylingTip4'),
+    i18n.getTranslation('stylingTip5'),
+  ];
+  
+  const overallImpressions = [
+      i18n.getTranslation('overallImpression1'),
+      i18n.getTranslation('overallImpression2'),
+      i18n.getTranslation('overallImpression3'),
+      i18n.getTranslation('overallImpression4')
+  ];
+
+  // --- Randomly select content ---
+  const selectedColor = personalColors[Math.floor(Math.random() * personalColors.length)];
+  const selectedImpression = overallImpressions[Math.floor(Math.random() * overallImpressions.length)];
+  const selectedItems = [...fashionItems].sort(() => 0.5 - Math.random()).slice(0, 3);
+  const selectedTip = stylingTips[Math.floor(Math.random() * stylingTips.length)];
+
+  // --- Build the HTML string ---
+  return `
+    <h3 data-i18n-key="reportSectionOverallImpression">${i18n.getTranslation('reportSectionOverallImpression')}</h3>
+    <p>${selectedImpression}</p>
+    
+    <h3 data-i18n-key="reportSectionPersonalColorDiagnosis">${i18n.getTranslation('reportSectionPersonalColorDiagnosis')}</h3>
+    <p><strong>${selectedColor.name}:</strong> ${selectedColor.desc}</p>
+    
+    <h3 data-i18n-key="reportSectionRecommendedFashionItems">${i18n.getTranslation('reportSectionRecommendedFashionItems')}</h3>
+    <ul>
+      <li>${selectedItems[0]}</li>
+      <li>${selectedItems[1]}</li>
+      <li>${selectedItems[2]}</li>
+    </ul>
+    
+    <h3 data-i18n-key="reportSectionTodaysStylingTip">${i18n.getTranslation('reportSectionTodaysStylingTip')}</h3>
+    <p>${selectedTip}</p>
+  `;
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   // --- DOM Element Selectors ---
   const uploadContainer = document.getElementById('upload-container');
@@ -139,82 +218,4 @@ document.addEventListener('DOMContentLoaded', () => {
     imageUpload.value = ''; // Clear the file input
   }
 
-  /**
-   * Generates a randomized, detailed style report.
-   * This is the core of providing "high-value content".
-   * @returns {string} HTML string of the generated report.
-   */
-  function generateStyleReport() {
-    // --- Data for randomization ---
-    const personalColors = [
-      {
-        name: i18n.getTranslation('personalColorSpringName'),
-        desc: i18n.getTranslation('personalColorSpringDesc')
-      },
-      {
-        name: i18n.getTranslation('personalColorSummerName'),
-        desc: i18n.getTranslation('personalColorSummerDesc')
-      },
-      {
-        name: i18n.getTranslation('personalColorAutumnName'),
-        desc: i18n.getTranslation('personalColorAutumnDesc')
-      },
-      {
-        name: i18n.getTranslation('personalColorWinterName'),
-        desc: i18n.getTranslation('personalColorWinterDesc')
-      },
-    ];
-
-    const fashionItems = [
-      i18n.getTranslation('fashionItem1'),
-      i18n.getTranslation('fashionItem2'),
-      i18n.getTranslation('fashionItem3'),
-      i18n.getTranslation('fashionItem4'),
-      i18n.getTranslation('fashionItem5'),
-      i18n.getTranslation('fashionItem6'),
-      i18n.getTranslation('fashionItem7'),
-      i18n.getTranslation('fashionItem8'),
-      i18n.getTranslation('fashionItem9'),
-    ];
-
-    const stylingTips = [
-      i18n.getTranslation('stylingTip1'),
-      i18n.getTranslation('stylingTip2'),
-      i18n.getTranslation('stylingTip3'),
-      i18n.getTranslation('stylingTip4'),
-      i18n.getTranslation('stylingTip5'),
-    ];
-    
-    const overallImpressions = [
-        i18n.getTranslation('overallImpression1'),
-        i18n.getTranslation('overallImpression2'),
-        i18n.getTranslation('overallImpression3'),
-        i18n.getTranslation('overallImpression4')
-    ];
-
-    // --- Randomly select content ---
-    const selectedColor = personalColors[Math.floor(Math.random() * personalColors.length)];
-    const selectedImpression = overallImpressions[Math.floor(Math.random() * overallImpressions.length)];
-    const selectedItems = [...fashionItems].sort(() => 0.5 - Math.random()).slice(0, 3);
-    const selectedTip = stylingTips[Math.floor(Math.random() * stylingTips.length)];
-
-    // --- Build the HTML string ---
-    return `
-      <h3 data-i18n-key="reportSectionOverallImpression">${i18n.getTranslation('reportSectionOverallImpression')}</h3>
-      <p>${selectedImpression}</p>
-      
-      <h3 data-i18n-key="reportSectionPersonalColorDiagnosis">${i18n.getTranslation('reportSectionPersonalColorDiagnosis')}</h3>
-      <p><strong>${selectedColor.name}:</strong> ${selectedColor.desc}</p>
-      
-      <h3 data-i18n-key="reportSectionRecommendedFashionItems">${i18n.getTranslation('reportSectionRecommendedFashionItems')}</h3>
-      <ul>
-        <li>${selectedItems[0]}</li>
-        <li>${selectedItems[1]}</li>
-        <li>${selectedItems[2]}</li>
-      </ul>
-      
-      <h3 data-i18n-key="reportSectionTodaysStylingTip">${i18n.getTranslation('reportSectionTodaysStylingTip')}</h3>
-      <p>${selectedTip}</p>
-    `;
-  }
 });
